@@ -37,7 +37,7 @@ For more information about supported password schemes, go to [Dovecot's document
 
 #### Mailbox formats
 
-[Dovecot supports][mboxes] various mailbox formats, I've chosen to support Maildir and dbox (the container will fail if you chose something else.
+[Dovecot supports][mboxes] various mailbox formats, I've chosen to support Maildir and dbox (the container will fail if you chose something else).
 
  - `maildir`: Maildir format. Mails are stored in /home/app/Maildir
  - `sdbox`: Dbox format, one message per file. Mails are stored in /home/app/dbox
