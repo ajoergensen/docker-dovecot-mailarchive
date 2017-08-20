@@ -1,19 +1,14 @@
 #!/usr/bin/with-contenv bash
-set -x
+set -e
 
 : ${PUID:="911"}
 : ${PGID:="911"}
 : ${MBOXFORMAT:="maildir"}
 
-if [ -n $MAIL_PASSWORD ]
+if [[ $MAIL_PASSWORD != *"CRYPT"* ]]
  then
-	echo $MAIL_PASSWORD | grep -q CRYPT 
-	if [[ $? -ne 0 ]]
-	 then
-		TMP_PASSWORD=`echo "$MAIL_PASSWORD" | mkpasswd -s -m sha-512`
-		MAIL_PASSWORD="{SHA512-CRYPT}$TMP_PASSWORD"
-	fi	
-fi
+	MAIL_PASSWORD=`doveadm pw -s BLF-CRYPT  -p$MAIL_PASSWORD`
+fi	
 
 echo "app:$MAIL_PASSWORD:$PUID:$PGID::/home/app::" > /etc/dovecot/users
 
@@ -47,7 +42,7 @@ case $MBOXFORMAT in
 	;;
 	*)
 		echo "Unsupported MBOXFORMAT chosen ($MBOXFORMAT). Use maildir, sdbox or mdbox"
-		exit 1
+		s6-svscanctl -t /var/run/s6/services
 	;;
 esac
 

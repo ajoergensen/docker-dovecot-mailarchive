@@ -1,7 +1,7 @@
 FROM ajoergensen/baseimage-alpine
 
 RUN \
-	apk -U add dovecot mkpasswd && \
+	apk -U add dovecot && \
         echo "ssl = no" > /etc/dovecot/conf.d/10-ssl.conf && \
         echo "log_path = /dev/stderr" >> /etc/dovecot/conf.d/10-logging.conf && \
         echo "auth_verbose = yes" >> /etc/dovecot/conf.d/10-logging.conf && \
