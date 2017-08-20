@@ -1,4 +1,4 @@
-Dovecot (for mailarchhive)
+Dovecot (for mail archive)
 ==========================
 
 Dovecot configured with one user (app), great for archiving mails. 
@@ -7,7 +7,7 @@ As it is supposed (for now at least) to be accessed locally or via a ssh tunnel,
 
 ### Usage
 
- `docker run --rm --name mailarchive -e MBOXFORMAT=mdbox -e "MAILPASSWORD={SHA512-CRYPT}$6$/LQkGPokW$Htf33uIYq6x9o7XCiVhNbA7IM4cjWjSAnY/tJyroy.suypFnIFkq2S3EnZV0pjbCh41.sLGsbljcNb0C3ZFH9/" ajoergensen/dovecot-mailarchive`
+ `docker run --rm --name mailarchive -e MBOXFORMAT=mdbox -e "MAILPASSWORD={SHA512-CRYPT}$6$/LQkGPokW$Htf33uIYq6x9o7XCiVhNbA7IM4cjWjSAnY/tJyroy.suypFnIFkq2S3EnZV0pjbCh41.sLGsbljcNb0C3ZFH9/" -v ./storage:/home/app ajoergensen/dovecot-mailarchive`
 
 ### Environment
 
