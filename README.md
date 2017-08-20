@@ -20,7 +20,18 @@ A note on the password. If you supply a clear text password it will be encrypted
 
 I recommend using the encrypted form of the password in the environment.
 
-On Linux, use `mkpasswd` to encrypt the password: `mkpasswd -m sha-512` then prefix the hashed string with the selected password hashing algorithm, in this case `{SHA512-CRYPT}`
+If you want to copy the password string from an existing account, use this mapping for MAIL_PASSWORD:
+
+- If the string starts with `$6$`, use `{SHA512-CRYPT}$6$existinghash`
+- If the string starts with `$5$`, use `{SHA256-CRYPT}$5$existinghash`
+- If the string starts with `$1$`, use `{MD5-CRYPT}$1$existinghash` (or better yet, generate a new hash as MD5 is considered weak)
+
+To create an encrypted password string, enter the container with `docker exec -it dovecot bash` and run
+
+```bash
+bash-4.3# doveadm pw -s BLF-CRYPT
+```
+This will prompt for a password and return the hash.
 
 For more information about supported password schemes, go to [Dovecot's documentation](https://wiki2.dovecot.org/Authentication/PasswordSchemes)
 
