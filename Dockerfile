@@ -1,4 +1,5 @@
 FROM ajoergensen/baseimage-alpine
+MAINTAINER ajoergensen
 
 RUN \
 	apk -U add dovecot && \
